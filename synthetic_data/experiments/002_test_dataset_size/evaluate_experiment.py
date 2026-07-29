@@ -47,6 +47,14 @@ cnn_accuracies = accuracy_per_file(cnn_files)
 glp_accuracies = accuracy_per_file(glp_files)
 aug_accuracies = accuracy_per_file(aug_files)
 
+print("\nAccuracies")
+print("CNN")
+print(" & ".join([f"{acc:.1f}" for acc in cnn_accuracies]))
+print("Augmented CNN")
+print(" & ".join([f"{acc:.1f}" for acc in aug_accuracies]))
+print("GLNN")
+print(" & ".join([f"{acc:.1f}" for acc in glp_accuracies]))
+
 ratios = [1.0, 0.5, 0.25, 0.1, 0.05, 0.01, 0.005, 0.002]
 
 F, ax = plt.subplots(1, 1, figsize=(10, 10))
