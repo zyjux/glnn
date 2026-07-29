@@ -30,3 +30,4 @@ img_size:
   - 128
   - 128
 do_pool: False
+plot_fn: "max_difference_without_pooling.png"

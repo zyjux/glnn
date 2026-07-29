@@ -21,6 +21,8 @@ args = parser.parse_args()
 
 TC_DATA_DIR = "/mnt/data2/lverhoef/RI/learning_examples/rotated_with_storm_motion/imputed/normalized/"
 
+plt.rcParams["font.size"] = 15.0
+
 
 @dataclass
 class configs:
@@ -126,9 +128,9 @@ print(f"Using {device} device")
 
 # Set up plot
 F, ax = plt.subplots(1, 1, figsize=(8, 8))
-ax.set_xlabel("Theta")
+ax.set_xlabel(r"$\theta$")
 ax.set_ylabel("Max difference")
-# ax.set_ylim(None, 0.015)
+ax.set_ylim(None, 0.014)
 
 # theta_max = max(cfg.thetas)
 # ref_thetas = np.arange(0, theta_max, 0.1)

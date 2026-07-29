@@ -29,3 +29,4 @@ num_input_samples: 5
 img_size:
   - 128
   - 128
+plot_fn: "max_difference_with_pooling.png"
