@@ -8,18 +8,13 @@ dependencies:
   - python
   - ipykernel
   - numpy
-  - numba
   - scipy
-  - scikit-image
-  - tqdm
   - xarray
   - dask
-  - pandas
   - matplotlib
   - torchinfo
   - ipywidgets
-  - phate
   - pytorch
   - torchvision
   - torchaudio
-  - pytorch::pytorch-cuda=12.4.*
+  - pytorch::pytorch-cuda=13.3.*
