@@ -3,28 +3,6 @@ from torch import nn
 from torchvision.transforms.functional import rotate
 
 
-class crps_loss(nn.Module):
-    def __init__(self, reduction: str = "mean"):
-        super().__init__()
-        self.reduction_f = {
-            "none": nn.Identity(),
-            "mean": torch.mean,
-            "sum": torch.sum,
-        }.get(reduction)
-
-    def forward(self, predicted: torch.Tensor, target: torch.Tensor):
-        return self.reduction_f(
-            torch.mean(torch.abs(predicted - torch.unsqueeze(target, dim=-1)), dim=-1)
-            - 0.5
-            * torch.mean(
-                torch.abs(
-                    torch.unsqueeze(predicted, -1) - torch.unsqueeze(predicted, -2)
-                ),
-                dim=(-1, -2),
-            )
-        )  # type: ignore
-
-
 class glp_rotation_stack(nn.Module):
     def __init__(self, num_angles=None, angle_inc=None):
         super().__init__()
@@ -59,26 +37,6 @@ class glp_rotation_pool(nn.Module):
                 image[..., i], -angle_increment * relative_offset
             )
         return nn.MaxPool3d(kernel_size=(1, 1, self.kernel_size))(output_image)
-
-
-class glp_linear(nn.Module):
-    def __init__(
-        self, in_features: int, out_features: int, bias=True, device=None, dtype=None
-    ):
-        super().__init__()
-        self.linear = nn.Linear(
-            in_features=in_features,
-            out_features=out_features,
-            bias=bias,
-            device=device,
-            dtype=dtype,
-        )
-
-    def forward(self, in_stack):
-        return torch.stack(
-            [self.linear(torch.squeeze(x)) for x in torch.split(in_stack, 1, dim=-1)],
-            dim=-1,
-        )
 
 
 class simple_model(nn.Module):
